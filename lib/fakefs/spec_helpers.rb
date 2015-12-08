@@ -49,7 +49,7 @@ module FakeFS
     include ::FakeFS
 
     def self.extended(example_group)
-      example_group.use_fakefs(example_group, with: :each)
+      example_group.use_fakefs(example_group, :with => :each)
     end
 
     def self.included(example_group)
@@ -61,7 +61,7 @@ module FakeFS
       include ::FakeFS
 
       def self.extended(example_group)
-        example_group.use_fakefs(example_group, with: :all)
+        example_group.use_fakefs(example_group, :with => :all)
       end
 
       def self.included(example_group)

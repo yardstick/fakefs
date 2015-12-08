@@ -68,14 +68,14 @@ module FakeFS
     alias_method :remove, :rm
 
     def rm_rf(list, options = {})
-      rm_r(list, options.merge(force: true))
+      rm_r(list, options.merge(:force => true))
     end
     alias_method :rmtree, :rm_rf
     alias_method :safe_unlink, :rm_f
     alias_method :remove_entry_secure, :rm_rf
 
     def ln_s(target, path, options = {})
-      options = { force: false }.merge(options)
+      options = { :force => false }.merge(options)
       fail(Errno::EEXIST, path) if FileSystem.find(path) && !options[:force]
       FileSystem.delete(path)
 
@@ -87,7 +87,7 @@ module FakeFS
     end
 
     def ln_sf(target, path)
-      ln_s(target, path, force: true)
+      ln_s(target, path, :force => true)
     end
 
     alias_method :symlink, :ln_s
@@ -96,7 +96,7 @@ module FakeFS
       fail Errno::ENOTDIR, dest if src.is_a?(Array) && !File.directory?(dest)
 
       # handle `verbose' flag
-      RealFileUtils.cp src, dest, options.merge(noop: true)
+      RealFileUtils.cp src, dest, options.merge(:noop => true)
 
       # handle `noop' flag
       return if options[:noop]
@@ -130,7 +130,7 @@ module FakeFS
 
     def cp_r(src, dest, options = {})
       # handle `verbose' flag
-      RealFileUtils.cp_r src, dest, options.merge(noop: true)
+      RealFileUtils.cp_r src, dest, options.merge(:noop => true)
 
       # handle `noop' flag
       return if options[:noop]
@@ -163,7 +163,7 @@ module FakeFS
 
     def mv(src, dest, options = {})
       # handle `verbose' flag
-      RealFileUtils.mv src, dest, options.merge(noop: true)
+      RealFileUtils.mv src, dest, options.merge(:noop => true)
 
       # handle `noop' flag
       return if options[:noop]

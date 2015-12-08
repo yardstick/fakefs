@@ -1,7 +1,7 @@
 module FakeFS
   # Kernel Module
   module Kernel
-    @captives = { original: {}, hijacked: {} }
+    @captives = { :original => {}, :hijacked => {} }
 
     class << self
       attr_accessor :captives

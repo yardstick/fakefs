@@ -269,7 +269,7 @@ module FakeFS
     end
 
     def self.binread(file, length = nil, offset = 0)
-      File.read(file, length, offset, mode: 'rb:ASCII-8BIT')
+      File.read(file, length, offset, :mode => 'rb:ASCII-8BIT')
     end
 
     def self.fnmatch?(pattern, path, flags = 0)

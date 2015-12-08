@@ -57,15 +57,15 @@ module FakeFS
     end
 
     def regexp(pattern)
-      regex_body = pattern.gsub('.', '\.')
-                   .gsub('?', '.')
-                   .gsub('*', '.*')
-                   .gsub('(', '\(')
-                   .gsub(')', '\)')
-                   .gsub(/\{(.*?)\}/) do
+      regex_body = pattern.gsub('.', '\.').
+                   gsub('?', '.').
+                   gsub('*', '.*').
+                   gsub('(', '\(').
+                   gsub(')', '\)').
+                   gsub(/\{(.*?)\}/) do
                      "(#{Regexp.last_match[1].gsub(',', '|')})"
-                   end
-                   .gsub(/\A\./, '(?!\.).')
+                   end.
+                   gsub(/\A\./, '(?!\.).')
       /\A#{regex_body}\Z/
     end
 
