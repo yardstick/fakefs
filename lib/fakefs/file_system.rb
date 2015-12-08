@@ -152,8 +152,7 @@ module FakeFS
 
     def directories_under(dir)
       children = dir.entries.select { |f| f.is_a? FakeDir }
-      ([dir] + children + children.map { |c| directories_under(c) })
-        .flatten.uniq
+      ([dir] + children + children.map { |c| directories_under(c) }).flatten.uniq
     end
 
     def assert_dir(dir)
